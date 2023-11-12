@@ -25,7 +25,7 @@ runs:
       run: cp ${{ inputs.certificate-file }} $RUNNER_TEMP/certificate.p12
     - shell: bash
       if: ${{ inputs.certificate-base64 != null }}
-      run: echo -n ${{ inputs.certificate-base64 }} | base64 --decode -o $RUNNER_TEMP/certificate.p12
+      run: echo -n "${{ inputs.certificate-base64 }}" | base64 --decode -o $RUNNER_TEMP/certificate.p12
     - shell: bash
       run: |
         PASSWORD=${{ inputs.certificate-file != null }} && "${{ inputs.certificate-file }}" || $(uuidgen)
