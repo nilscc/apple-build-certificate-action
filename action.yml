@@ -28,7 +28,7 @@ runs:
       run: echo -n "${{ inputs.certificate-base64 }}" | base64 --decode -o $RUNNER_TEMP/certificate.p12
     - shell: bash
       run: |
-        PASSWORD=${{ inputs.certificate-file != null }} && "${{ inputs.certificate-file }}" || $(uuidgen)
+        PASSWORD=$(uuidgen)
         KEYCHAIN_PATH=$RUNNER_TEMP/signing.keychain-db
         security create-keychain -p $PASSWORD $KEYCHAIN_PATH
         security set-keychain-settings -lut 21600 $KEYCHAIN_PATH
